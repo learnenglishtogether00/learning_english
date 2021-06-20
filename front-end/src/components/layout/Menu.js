@@ -12,7 +12,6 @@ const BurgerMenu = (props) => {
   const closeMenu = () => {
     setOpenMenu(false);
   };
-
   return (
     <Menu
       {...props}

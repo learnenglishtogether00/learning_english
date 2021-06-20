@@ -4,6 +4,8 @@ import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
+import avatar from "../../public/avatar.jpg";
+
 const useStyles = makeStyles((theme) => {
   return {
     root: {
@@ -43,11 +45,7 @@ const Layout = ({ children }) => {
       </Grid>
 
       <Grid container direction="column" justify="center" alignItems="center">
-        <Avatar
-          className={classes.avatar}
-          alt="Remy Sharp"
-          src="https://i.pravatar.cc/300"
-        />
+        <Avatar className={classes.avatar} alt="avatar" src={avatar} />
 
         <Typography variant="h5" gutterBottom>
           Hi! Eri Huỳnh
