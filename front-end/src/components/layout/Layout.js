@@ -53,8 +53,7 @@ const Layout = ({ children }) => {
           Hi! Eri Huỳnh
         </Typography>
       </Grid>
-
-      <main>{children}</main>
+      <div>{children}</div>
       <Typography variant="body2" gutterBottom className={classes.signature}>
         Created By Eri Huỳnh, 2021
       </Typography>

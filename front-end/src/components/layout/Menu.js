@@ -1,26 +1,38 @@
-import React from "react";
-import { stack as Slider } from "react-burger-menu";
+import React, { useState } from "react";
+import { stack as Menu } from "react-burger-menu";
+import { Link } from "react-router-dom";
 
-const Menu = (props) => {
+const BurgerMenu = (props) => {
+  const [openMenu, setOpenMenu] = useState(false);
+
+  const handleStateChange = (state) => {
+    setOpenMenu(state.isOpen);
+  };
+
+  const closeMenu = () => {
+    setOpenMenu(false);
+  };
+
   return (
-    <Slider {...props}>
-      <a className="menu-item" href="/">
+    <Menu
+      {...props}
+      isOpen={openMenu}
+      onStateChange={(state) => handleStateChange(state)}
+    >
+      <Link className="menu-item" to="/" onClick={() => closeMenu()}>
         Trang chủ
-      </a>
-
-      <a className="menu-item" href="/burgers">
+      </Link>
+      <Link className="menu-item" to="/games" onClick={() => closeMenu()}>
         Trò chơi
-      </a>
-
-      <a className="menu-item" href="/pizzas">
+      </Link>
+      <Link className="menu-item" to="/submit" onClick={() => closeMenu()}>
         Đóng góp
-      </a>
-
-      <a className="menu-item" href="/desserts">
+      </Link>
+      <Link className="menu-item" to="/user" onClick={() => closeMenu()}>
         Tài khoản
-      </a>
-    </Slider>
+      </Link>
+    </Menu>
   );
 };
 
-export default Menu;
+export default BurgerMenu;
