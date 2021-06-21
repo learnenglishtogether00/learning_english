@@ -4,6 +4,8 @@ import HomePage from "./pages/HomePage";
 import GamePage from "./pages/GamePage";
 import SubmitPage from "./pages/SubmitPage";
 import UserPage from "./pages/UserPage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 
 const Main = () => {
   return (
@@ -13,6 +15,8 @@ const Main = () => {
         <Route path="/user" component={UserPage} />
         <Route path="/games" component={GamePage} />
         <Route path="/submit" component={SubmitPage} />
+        <Route path="/login" component={LoginPage} />
+        <Route path="/register" component={RegisterPage} />
       </Switch>
     </main>
   );

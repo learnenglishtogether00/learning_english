@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => {
       height: theme.spacing(12),
     },
     signature: {
-      width: "100%",
+      width: "98%",
       textAlign: "center",
       position: "absolute",
       bottom: 0,
@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => {
 
 const Layout = ({ children }) => {
   const classes = useStyles();
+  const isLogged = false;
 
   return (
     <div className={classes.root}>
@@ -44,13 +45,16 @@ const Layout = ({ children }) => {
         </Typography>
       </Grid>
 
-      <Grid container direction="column" justify="center" alignItems="center">
-        <Avatar className={classes.avatar} alt="avatar" src={avatar} />
+      {isLogged && (
+        <Grid container direction="column" justify="center" alignItems="center">
+          <Avatar className={classes.avatar} alt="avatar" src={avatar} />
 
-        <Typography variant="h5" gutterBottom>
-          Hi! Eri Huỳnh
-        </Typography>
-      </Grid>
+          <Typography variant="h5" gutterBottom>
+            Hi! Eri Huỳnh
+          </Typography>
+        </Grid>
+      )}
+
       <div>{children}</div>
       <Typography variant="body2" gutterBottom className={classes.signature}>
         Created By Eri Huỳnh, 2021
