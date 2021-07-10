@@ -171,7 +171,7 @@ export default function FreeSoloCreateOptionDialog({ setDetailWord }) {
             <DialogContentText>
               Hãy điền đầy đủ các thông tin cần thiết cho từ nhé!
             </DialogContentText>
-            <Grid container justify="space-between">
+            <Grid container justifyContent="space-between">
               <Grid item md={6}>
                 <TextField
                   fullWidth

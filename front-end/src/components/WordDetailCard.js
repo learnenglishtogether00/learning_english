@@ -32,7 +32,7 @@ const WordDetailCard = ({ detailWord }) => {
         <Grid container direction="column">
           <Grid item>
             <Box mb={2}>
-              <Grid container alignItems="center" spacing="2">
+              <Grid container alignItems="center" spacing={2}>
                 <Grid item>
                   <Typography variant="h5" component="h2">
                     {word}

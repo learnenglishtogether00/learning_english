@@ -31,7 +31,7 @@ const Layout = ({ children }) => {
 
   return (
     <div className={classes.root}>
-      <Grid container direction="row" justify="space-between">
+      <Grid container direction="row" justifyContent="space-between">
         <Typography variant="h5" gutterBottom>
           Learning English Together
         </Typography>
@@ -46,7 +46,12 @@ const Layout = ({ children }) => {
       </Grid>
 
       {isLogged && (
-        <Grid container direction="column" justify="center" alignItems="center">
+        <Grid
+          container
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+        >
           <Avatar className={classes.avatar} alt="avatar" src={avatar} />
 
           <Typography variant="h5" gutterBottom>

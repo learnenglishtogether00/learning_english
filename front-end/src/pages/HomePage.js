@@ -9,7 +9,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <Grid container direction="row" justify="center">
+      <Grid container direction="row" justifyContent="center">
         <Grid item md={6}>
           <WordAutoComplete setDetailWord={setDetailWord} />
           {detailWord && detailWord.word && (
