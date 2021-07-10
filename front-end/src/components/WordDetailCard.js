@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { Card, CardContent, Typography } from "@material-ui/core";
+import { Card, CardContent, Typography, Grid, Box } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -17,9 +17,6 @@ const useStyles = makeStyles((theme) => {
     title: {
       fontSize: 14,
     },
-    pos: {
-      marginBottom: 12,
-    },
   };
 });
 
@@ -32,29 +29,35 @@ const WordDetailCard = ({ detailWord }) => {
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent>
-        <Typography
-          className={classes.title}
-          color="textSecondary"
-          gutterBottom
-        >
-          Tạo bởi EriHuynh
-        </Typography>
-        <Typography variant="h5" component="h2">
-          {word}
-        </Typography>
-        <Typography className={classes.pos} color="textSecondary">
-          {wordType}
-        </Typography>
-        <Typography variant="body1" component="p">
-          {bull} <b>Nghĩa tiếng Việt: </b>
-          {vnWords}
-          <br />
-          {bull} <b>Từ đồng nghĩa: </b>
-          {related && !related.length > 0 ? `chưa cập nhật` : related}
-          <br />
-          {bull} <b>Mô tả: </b>
-          {!desc ? `chưa cập nhật` : desc}
-        </Typography>
+        <Grid container direction="column">
+          <Grid item>
+            <Box mb={2}>
+              <Grid container alignItems="center" spacing="2">
+                <Grid item>
+                  <Typography variant="h5" component="h2">
+                    {word}
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Typography color="textSecondary">{wordType.name}</Typography>
+                </Grid>
+                <Grid item></Grid>
+              </Grid>
+            </Box>
+          </Grid>
+          <Grid item>
+            <Typography variant="body1" component="p">
+              {bull} <b>Nghĩa tiếng Việt: </b>
+              {vnWords}
+              <br />
+              {bull} <b>Từ đồng nghĩa: </b>
+              {related && !related.length > 0 ? `chưa cập nhật` : related}
+              <br />
+              {bull} <b>Mô tả: </b>
+              {!desc ? `chưa cập nhật` : desc}
+            </Typography>
+          </Grid>
+        </Grid>
       </CardContent>
     </Card>
   );

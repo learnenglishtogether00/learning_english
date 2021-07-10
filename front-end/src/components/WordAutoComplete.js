@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   TextField,
   Dialog,
@@ -17,6 +17,9 @@ import Autocomplete, {
   createFilterOptions,
 } from "@material-ui/lab/Autocomplete";
 import { makeStyles } from "@material-ui/core/styles";
+import axios from "axios";
+
+import { debounce } from "../utils";
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -35,8 +38,31 @@ const filter = createFilterOptions();
 
 export default function FreeSoloCreateOptionDialog({ setDetailWord }) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(null);
-  const [open, toggleOpen] = React.useState(false);
+  const [value, setValue] = useState(null);
+  const [open, toggleOpen] = useState(false);
+  const [dialogValue, setDialogValue] = useState({
+    word: "",
+  });
+  const [curWordData, setCurWordData] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+
+  const fetchWordByEN = (newKeyWord) => {
+    axios
+      .get(`http://localhost:5035/api/wordsByEN/${newKeyWord}`)
+      .then(({ data: res }) => {
+        setCurWordData(res.data);
+      });
+  };
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      if (inputValue) {
+        fetchWordByEN(inputValue);
+      }
+    }, 500);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [inputValue]);
 
   const handleClose = () => {
     setDialogValue({
@@ -45,10 +71,6 @@ export default function FreeSoloCreateOptionDialog({ setDetailWord }) {
 
     toggleOpen(false);
   };
-
-  const [dialogValue, setDialogValue] = React.useState({
-    word: "",
-  });
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -94,6 +116,12 @@ export default function FreeSoloCreateOptionDialog({ setDetailWord }) {
             setDetailWord({ ...newValue });
           }
         }}
+        onInputChange={(event, newInputValue) => {
+          if (newInputValue) {
+            setInputValue(newInputValue);
+          }
+          setCurWordData([]);
+        }}
         filterOptions={(options, params) => {
           const filtered = filter(options, params);
 
@@ -107,7 +135,7 @@ export default function FreeSoloCreateOptionDialog({ setDetailWord }) {
           return filtered;
         }}
         id="free-solo-dialog-demo"
-        options={WORDS_DATA}
+        options={curWordData}
         getOptionLabel={(option) => {
           // e.g value selected with enter, right from the input
           if (typeof option === "string") {
@@ -145,7 +173,7 @@ export default function FreeSoloCreateOptionDialog({ setDetailWord }) {
             <DialogContentText>
               Hãy điền đầy đủ các thông tin cần thiết cho từ nhé!
             </DialogContentText>
-            <Grid container justify="space-between" spacing={2}>
+            <Grid container justify="space-between">
               <Grid item md={6}>
                 <TextField
                   fullWidth
@@ -241,27 +269,3 @@ export default function FreeSoloCreateOptionDialog({ setDetailWord }) {
     </div>
   );
 }
-
-const WORDS_DATA = [
-  {
-    word: "struggles",
-    wordType: "Danh từ (N)",
-    vnWords: ["đấu tranh"],
-    related: [],
-    desc: "",
-  },
-  {
-    word: "lack",
-    wordType: "Động từ (V)",
-    vnWords: ["thiếu xót"],
-    related: [],
-    desc: "",
-  },
-  {
-    word: "drug",
-    wordType: "Danh từ (N)",
-    vnWords: ["thuốc"],
-    related: [],
-    desc: "",
-  },
-];
